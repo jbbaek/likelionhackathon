@@ -67,6 +67,8 @@ const Login = () => {
         <div className="footer">
           <span>아직 회원이 아니라면?</span>
           <Link to="/signup">회원가입</Link>
+          <br />
+          <Link to="/find">아이디/비밀번호 찾기</Link>
         </div>
       </div>
     </div>
