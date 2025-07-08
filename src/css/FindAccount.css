@@ -10,7 +10,7 @@
 .find-account-box {
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 6px 30px rgba(255, 87, 150, 0.12);
+  box-shadow: 0 6px 30px #ebf1f9;
   padding: 48px 38px 36px 38px;
   max-width: 400px;
   border: 2px solid black;
@@ -66,7 +66,7 @@
   padding: 13px 0;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
-  box-shadow: 0 2px 8px rgba(255, 183, 206, 0.09);
+  box-shadow: 0 2px 8px #ebf1f9;
 }
 .find-box button:hover {
   background: #6b96db;

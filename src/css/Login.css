@@ -9,7 +9,7 @@
 .login-box {
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 6px 30px rgba(255, 87, 150, 0.12);
+  box-shadow: 0 6px 30px #ebf1f9;
   padding: 48px 40px 36px 40px;
   min-width: 340px;
   max-width: 90vw;

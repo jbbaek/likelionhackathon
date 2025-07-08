@@ -52,13 +52,13 @@ const FindAccount = () => {
           <h3>아이디 찾기</h3>
           <input
             type="text"
-            placeholder="이름 입력"
+            placeholder="이름"
             value={idName}
             onChange={(e) => setIdName(e.target.value)}
           />
           <input
             type="email"
-            placeholder="이메일 입력"
+            placeholder="이메일"
             value={idEmail}
             onChange={(e) => setIdEmail(e.target.value)}
           />
@@ -74,13 +74,13 @@ const FindAccount = () => {
           <h3>비밀번호 찾기</h3>
           <input
             type="text"
-            placeholder="아이디 입력"
+            placeholder="아이디"
             value={pwId}
             onChange={(e) => setPwId(e.target.value)}
           />
           <input
             type="email"
-            placeholder="이메일 입력"
+            placeholder="이메일"
             value={pwEmail}
             onChange={(e) => setPwEmail(e.target.value)}
           />
