@@ -1,101 +1,62 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import "../css/FindAccount.css";
 
-const FindAccount = () => {
-  //아이디 찾기용 입력 상태
-  const [idName, setIdName] = useState("");
-  const [idEmail, setIdEmail] = useState("");
-  const [userId, setUserId] = useState(null);
+const FindPassword = () => {
+  const [isVerified, setIsVerified] = useState(false); // 인증 성공 여부
 
-  //비밀번호 찾기용 입력 상태
-  const [pwId, setPwId] = useState("");
-  const [pwEmail, setPwEmail] = useState("");
-  const [password, setPassword] = useState(null);
-
-  const handleFindId = () => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u["이름"] === idName && u["이메일"] === idEmail
-    );
-
-    if (user) {
-      setUserId(user["회원id"]);
-      setPassword(null); // 다른 결과 초기화
-    } else {
-      alert("일치하는 회원 정보가 없습니다.");
-      setUserId(null);
-    }
-  };
-
-  const handleFindPassword = () => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u["회원id"] === pwId && u["이메일"] === pwEmail
-    );
-
-    if (user) {
-      setPassword(user["비밀번호"]);
-      setUserId(null); // 다른 결과 초기화
-    } else {
-      alert("일치하는 회원 정보가 없습니다.");
-      setPassword(null);
-    }
+  const handleVerifyCode = () => {
+    // 실제 로직은 없으므로 임의로 인증 성공 처리
+    setIsVerified(true);
+    alert("인증이 확인되었습니다!");
   };
 
   return (
     <div className="find-account-container">
       <div className="find-account-box">
-        <h1>회원정보 찾기</h1>
+        <h1>비밀번호 찾기</h1>
 
-        <div className="find-box">
-          <h3>아이디 찾기</h3>
-          <input
-            type="text"
-            placeholder="이름"
-            value={idName}
-            onChange={(e) => setIdName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="이메일"
-            value={idEmail}
-            onChange={(e) => setIdEmail(e.target.value)}
-          />
-          <button onClick={handleFindId}>아이디 찾기</button>
-          {userId && (
-            <p>
-              가입된 아이디: <strong>{userId}</strong>
-            </p>
-          )}
+        <div className="form-group">
+          <label>아이디</label>
+          <input type="text" name="userId" placeholder="아이디 입력" />
         </div>
 
-        <div className="find-box">
-          <h3>비밀번호 찾기</h3>
-          <input
-            type="text"
-            placeholder="아이디"
-            value={pwId}
-            onChange={(e) => setPwId(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="이메일"
-            value={pwEmail}
-            onChange={(e) => setPwEmail(e.target.value)}
-          />
-          <button onClick={handleFindPassword}>비밀번호 찾기</button>
-          {password && (
-            <p>
-              비밀번호: <strong>{password}</strong>
-            </p>
-          )}
+        <div className="form-group">
+          <label>이메일</label>
+          <input type="email" name="email" placeholder="이메일 입력" />
+          <button type="button" className="send-code-btn">
+            인증코드 발송
+          </button>
         </div>
 
-        <Link to="/login">로그인으로 돌아가기</Link>
+        <div className="form-group">
+          <label>인증번호</label>
+          <input type="text" name="authCode" placeholder="인증번호 입력" />
+          <button
+            type="button"
+            className="verify-code-btn"
+            onClick={handleVerifyCode}
+          >
+            인증 확인
+          </button>
+        </div>
+
+        {/*인증 완료 시 아래 입력칸 보이기 */}
+        {isVerified && (
+          <div className="form-group">
+            <label>새 비밀번호</label>
+            <input
+              type="password"
+              name="newPassword"
+              placeholder="새 비밀번호 입력"
+            />
+            <button type="button" className="reset-password-btn">
+              비밀번호 재설정
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default FindAccount;
+export default FindPassword;

@@ -49,7 +49,7 @@ const Signup = () => {
   return (
     <div className="signup-wrapper">
       <div className="signup-container">
-        <h1>DevinSight</h1>
+        <h1>hackathon</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>아이디</label>
@@ -83,6 +83,16 @@ const Signup = () => {
               placeholder="이메일 주소"
               required
             />
+            <button type="button" className="verify-code-btn">
+              인증코드 발송
+            </button>
+          </div>
+          <div className="form-group">
+            <label>인증번호</label>
+            <input type="text" name="인증번호" placeholder="인증번호 입력" />
+            <button type="button" className="verify-code-btn">
+              인증 확인
+            </button>
           </div>
           <div className="form-group">
             <label>비밀번호</label>

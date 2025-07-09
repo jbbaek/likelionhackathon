@@ -68,6 +68,24 @@ form {
   display: flex;
   justify-content: center;
 }
+.verify-code-btn {
+  width: 100%;
+  background: #5391d9;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.08rem;
+  border: none;
+  border-radius: 8px;
+  padding: 13px 0;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  box-shadow: 0 2px 8px rgba(255, 183, 206, 0.1);
+}
+.verify-code-btn:hover {
+  background: #6b96db;
+  color: black;
+}
 
 .signup-btn {
   width: 100%;
