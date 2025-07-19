@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../css/PostPage.css";
 
 const EditCommentPage = () => {
@@ -12,12 +12,19 @@ const EditCommentPage = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleEdit = () => {
     if (currentUserId === commentAuthorId || currentUserRole === "admin") {
       // 수정 성공
       setIsSuccess(true);
       setIsError(false);
       // 실제 DB 연동하는 코드가 있다면 여기에 작성
+
+      // 1초 후 페이지 이동
+      setTimeout(() => {
+        navigate("/postdetailpage");
+      }, 1000);
     } else {
       // 권한 없음
       setIsSuccess(false);
@@ -43,10 +50,12 @@ const EditCommentPage = () => {
         <div className="message error">❌ 수정할 권한이 없습니다</div>
       )}
 
-      {/* 돌아가기 */}
-      <Link to="/postdetailpage">
-        <button>돌아가기</button>
-      </Link>
+      {/* 실패 시만 돌아가기 버튼 표시 */}
+      {isError && (
+        <Link to="/postdetailpage">
+          <button>돌아가기</button>
+        </Link>
+      )}
     </div>
   );
 };

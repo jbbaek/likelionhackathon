@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // useNavigate 추가
 import "../css/PostPage.css";
 
 const PostDetailPage = () => {
@@ -9,7 +9,11 @@ const PostDetailPage = () => {
     { id: 2, author: "admin", text: "관리자가 남긴 댓글" },
   ]);
 
-  // 댓글 추가
+  const currentUserId = "user123"; // 현재 로그인한 사용자 ID
+  const currentUserRole = "user"; // 또는 "admin"
+
+  const navigate = useNavigate(); // 페이지 이동용 훅
+
   const handleAddComment = () => {
     if (!comment.trim()) {
       alert("댓글을 입력해주세요.");
@@ -18,21 +22,31 @@ const PostDetailPage = () => {
 
     const newComment = {
       id: Date.now(),
-      author: "user123", // 임시 작성자
+      author: currentUserId,
       text: comment,
     };
 
     setComments([newComment, ...comments]);
-    setComment(""); // 입력창 초기화
+    setComment("");
   };
 
-  // 댓글 삭제
-  const handleDeleteComment = (id) => {
+  const handleDeleteComment = (id, author) => {
+    const isAuthorized =
+      currentUserId === author || currentUserRole === "admin";
+
+    if (!isAuthorized) {
+      alert("❌ 삭제할 권한이 없습니다.");
+      return;
+    }
+
     const confirmed = window.confirm("정말 삭제하시겠습니까?");
     if (!confirmed) return;
 
     const updatedComments = comments.filter((c) => c.id !== id);
     setComments(updatedComments);
+
+    alert("✅ 삭제되었습니다.");
+    navigate("/postdetailpage"); // 삭제 후 이동
   };
 
   return (
@@ -54,7 +68,6 @@ const PostDetailPage = () => {
 
       <hr />
 
-      {/* 댓글 작성 */}
       <div className="comment-write">
         <h4>댓글 작성</h4>
         <textarea
@@ -65,7 +78,6 @@ const PostDetailPage = () => {
         <button onClick={handleAddComment}>댓글 작성</button>
       </div>
 
-      {/* 댓글 목록 */}
       <div className="comment-list">
         <h4>댓글 목록</h4>
         {comments.map((c) => (
@@ -76,7 +88,9 @@ const PostDetailPage = () => {
             <Link to="/editcommentpage">
               <button>수정</button>
             </Link>
-            <button onClick={() => handleDeleteComment(c.id)}>삭제</button>
+            <button onClick={() => handleDeleteComment(c.id, c.author)}>
+              삭제
+            </button>
           </div>
         ))}
       </div>
