@@ -308,7 +308,17 @@ const MyPage = () => {
                   </option>
                 ))}
               </select>
-              <Bar data={barData} />
+              <Bar
+                data={barData}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      display: false,
+                    },
+                  },
+                }}
+              />
             </div>
           )}
 
